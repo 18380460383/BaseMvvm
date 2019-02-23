@@ -18,6 +18,11 @@ android {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi-v7a',"x86"
         }
+        repositories {
+            maven {
+                url "https://jitpack.io"
+            }
+        }
     }
     buildTypes {
         release {
@@ -42,11 +47,62 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    def androidDependencies=rootProject.ext.androidDependencies
-    implementation androidDependencies.appcompat_v7
-    implementation androidDependencies.constraint_layout
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation project(path: ':library:xrecyclerview')
+    implementation project(path: ':library:http')
+    implementation project(path: ':library:zoomlibrary')
+
+    def androidDependencies=rootProject.ext.androidDependencies
+    implementation androidDependencies.appcompat_v7
+    implementation androidDependencies.support_v4
+    implementation androidDependencies.design
+    implementation androidDependencies.cardview_v7
+    implementation androidDependencies.constraint_layout
+
+    def room =rootProject.ext.Room
+    implementation room.room_runtime
+    implementation room.room_compiler
+    implementation room.room_rxjava2
+    implementation room.paging_runtime
+    // Room
+
+    def liferecyler=rootProject.ext.liferecyler
+    implementation liferecyler.liferecyle_extensions
+    implementation liferecyler.liferecyle_reactivestreams
+
+    def camera =rootProject.ext.camera
+    implementation camera.zxing_core
+//    implementation "android.arch.lifecycle:common-java8:1.0.0"
+
+    def rxjava=rootProject.ext.rxjava
+    implementation rxjava.rxjava2_rxandroid
+    implementation rxjava.rxjava2_rxjava
+    // 用于Flowable的rxjava
+//    implementation 'io.reactivex:rxandroid:1.2.1'
+//    implementation "io.reactivex.rxjava2:rxjava:2.1.7"
+
+
+    def glide=rootProject.ext.glide
+    implementation glide.glide_transformations
+
+    implementation rootProject.ext.nineoldandroids
+    implementation rootProject.ext.banner
+    implementation rootProject.ext.slider
+    implementation rootProject.ext.bottomsheet
+    implementation rootProject.ext.multidex
+    implementation rootProject.ext.toastcompat
+    implementation rootProject.ext.flowlayout
+    implementation rootProject.ext.BaseRecyclerViewAdapterHelper
+    implementation rootProject.ext.bugly_crashreport
+    implementation rootProject.ext.bugly_nativecrashreport
+    // leakcanary
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+    // bugly start
+
+
 }

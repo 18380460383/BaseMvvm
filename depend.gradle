@@ -28,7 +28,7 @@ ext {    //所有项目根目录依赖
             recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
             support_v4       : "com.android.support:support-v4:${supportLibraryVersion}",
             design           : "com.android.support:design:${supportLibraryVersion}",
-            cardview_v4      : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            cardview_v7      : "com.android.support:cardview-v7:${supportLibraryVersion}",
             constraint_layout: "com.android.support.constraint:constraint-layout:${constraint_layout}"
     ]
     rxretrofit = [
@@ -46,10 +46,10 @@ ext {    //所有项目根目录依赖
     room_rxjava2 = room_version
     paging_runtime = '1.0.0'
     Room = [
-            room_runtime  : "android.arch.persistence.room:runtime:${room_runtime}",
-            room_compiler : "android.arch.persistence.room:compiler:${room_compiler}\"",
-            room_rxjava2  : "android.arch.persistence.room:rxjava2:${room_rxjava2}\"",
-            paging_runtime: "android.arch.paging:runtime:${paging_runtime}\""
+            room_runtime  : "android.arch.persistence.room:runtime:${room_version}",
+            room_compiler : "android.arch.persistence.room:compiler:${room_version}",
+            room_rxjava2  : "android.arch.persistence.room:rxjava2:${room_version}",
+            paging_runtime: "android.arch.paging:runtime:${paging_runtime}"
     ]
     liferecyle_extensions = '1.1.1'
     liferecyle_reactivestreams = '1.1.1'
