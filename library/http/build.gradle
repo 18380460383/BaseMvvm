@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+    def rootConfig = rootProject.extensions.getByName("ext")
+    compileSdkVersion rootConfig.androidCompileSdkVersion
+    buildToolsVersion rootConfig.androidBuildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootConfig.androidMinSdkVersion
+        targetSdkVersion rootConfig.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    def androidDependencies=rootProject.ext.androidDependencies
+    implementation androidDependencies.appcompat_v7
+    implementation rootProject.ext.gson
+    def rxretrofit=rootProject.ext.rxretrofit
+    implementation rxretrofit.retrofit2_retrofit
+    implementation rxretrofit.retrofit2_adapter_rxjava
+    implementation rxretrofit.retrofit2_converter_gson
+    implementation rxretrofit.okhttp3_okhttp
+    implementation rxretrofit.okhttp3_logging_interceptor
+    implementation rxretrofit.okio
+    implementation rxretrofit.rxandroid
+    //    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // add cookie
+    implementation files('libs/commons-lang-2.6.jar')
+}

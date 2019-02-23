@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    def rootConfig = rootProject.extensions.getByName("ext")
+    compileSdkVersion rootConfig.androidCompileSdkVersion
+    buildToolsVersion rootConfig.androidBuildToolsVersion
+    defaultConfig {
+        applicationId "com.sample.basemvvm"
+        minSdkVersion rootConfig.androidMinSdkVersion
+        targetSdkVersion rootConfig.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+        multiDexEnabled true
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a',"x86"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    // https://github.com/ReactiveX/RxJava/issues/4445
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def androidDependencies=rootProject.ext.androidDependencies
+    implementation androidDependencies.appcompat_v7
+    implementation androidDependencies.constraint_layout
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}
