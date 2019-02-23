@@ -28,9 +28,9 @@ dependencies {
     implementation androidDependencies.appcompat_v7
     implementation rootProject.ext.gson
     def rxretrofit=rootProject.ext.rxretrofit
-    implementation rxretrofit.retrofit2_retrofit
-    implementation rxretrofit.retrofit2_adapter_rxjava
-    implementation rxretrofit.retrofit2_converter_gson
+    api rxretrofit.retrofit2_retrofit
+    api rxretrofit.retrofit2_adapter_rxjava
+    api rxretrofit.retrofit2_converter_gson
     implementation rxretrofit.okhttp3_okhttp
     implementation rxretrofit.okhttp3_logging_interceptor
     implementation rxretrofit.okio
