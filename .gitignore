@@ -8,8 +8,8 @@
 /captures
 .externalNativeBuild
 /app/build
-/library/http/build
-/library/xrecyclerview/build
-/library/zoomlibrary/build
+/http/build
+/xrecyclerview/build
+/zoomlibrary/build
 
 
