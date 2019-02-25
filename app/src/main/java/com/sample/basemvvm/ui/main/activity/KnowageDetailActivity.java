@@ -24,9 +24,7 @@ import com.sample.basemvvm.util.ToolbarHelper;
 
 public class KnowageDetailActivity extends BaseActivity<NoViewModel, ActivityKnowDetailBinding> {
 
-    // private ActivityKnowDetailBinding bindingView;
     private CollapsingToolbarLayoutState state;
-
     private enum CollapsingToolbarLayoutState {
         EXPANDED,
         COLLAPSED,
