@@ -8,8 +8,10 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,7 @@ import rx.subscriptions.CompositeSubscription;
  * @author jingbin
  * @date 16/12/10
  */
-public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewDataBinding> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     // ViewModel
     protected VM viewModel;
@@ -39,6 +41,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
     protected SV bindingView;
     private View refresh;
     private View loadingView;
+    private SwipeRefreshLayout mSwipResfresh;
     private ActivityBaseBinding mBaseBinding;
     private AnimationDrawable mAnimationDrawable;
     private CompositeSubscription mCompositeSubscription;
@@ -79,16 +82,42 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
         }
 
         setToolBar();
+        mSwipResfresh = getView(R.id.mSwipResfresh);
+        initSwipRefresh();
         // 点击加载失败布局
         refresh.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 showLoading();
-                onRefresh();
+                onRefreshLoad();
             }
         });
         bindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
+    }
+
+
+    private void initSwipRefresh() {
+        mSwipResfresh.setEnabled(false);
+        mSwipResfresh.setOnRefreshListener(this);
+        mSwipResfresh.setColorSchemeResources(R.color.colorAccent);
+        mSwipResfresh.setProgressViewOffset(false, 100, 200);
+        mSwipResfresh.setRefreshing(false);
+    }
+
+    public void setSwipFresh(boolean isCanRefresh) {
+        mSwipResfresh.setEnabled(isCanRefresh);
+    }
+
+    public void setmSwipResfreshState() {
+        if (mSwipResfresh.isRefreshing()) {
+            mSwipResfresh.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        onRefreshLoad();
     }
 
     /**
@@ -105,6 +134,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
      * 设置titlebar
      */
     protected void setToolBar() {
+        mBaseBinding.toolBar.setVisibility(View.GONE);
         setSupportActionBar(mBaseBinding.toolBar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -123,6 +153,10 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
                 }
             }
         });
+    }
+
+    private void setToolBarVisity(boolean isVistity) {
+        mBaseBinding.toolBar.setVisibility(isVistity ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -181,7 +215,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
     /**
      * 失败后点击刷新
      */
-    protected void onRefresh() {
+    protected void onRefreshLoad() {
 
     }
 

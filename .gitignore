@@ -7,3 +7,9 @@
 /build
 /captures
 .externalNativeBuild
+/app/build
+/http/build
+/xrecyclerview/build
+/zoomlibrary/build
+
+

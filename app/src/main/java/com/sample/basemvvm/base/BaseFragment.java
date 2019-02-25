@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * 是没有title的Fragment
  */
-public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewDataBinding> extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     // ViewModel
     protected VM viewModel;
@@ -41,6 +42,9 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     private LinearLayout mRefresh;
     // 内容布局
     protected RelativeLayout mContainer;
+
+    private SwipeRefreshLayout mSwipResfresh;
+
     // 动画
     private AnimationDrawable mAnimationDrawable;
     private CompositeSubscription mCompositeSubscription;
@@ -100,17 +104,42 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
+        mSwipResfresh = getView(R.id.mSwipResfresh);
+        initSwipRefresh();
         mRefresh = getView(R.id.ll_error_refresh);
         // 点击加载失败布局
         mRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showLoading();
-                onRefresh();
+                onRefreshLoad();
             }
         });
         bindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
+    }
+
+    private void initSwipRefresh() {
+        mSwipResfresh.setEnabled(false);
+        mSwipResfresh.setOnRefreshListener(this);
+        mSwipResfresh.setColorSchemeResources(R.color.colorAccent);
+        mSwipResfresh.setProgressViewOffset(false, 100, 200);
+        mSwipResfresh.setRefreshing(false);
+    }
+
+    public void setSwipFresh(boolean isCanRefresh) {
+        mSwipResfresh.setEnabled(isCanRefresh);
+    }
+
+    public void setmSwipResfreshState() {
+        if (mSwipResfresh.isRefreshing()) {
+            mSwipResfresh.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        onRefreshLoad();
     }
 
     /**
@@ -135,7 +164,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     /**
      * 加载失败后点击后的操作
      */
-    protected void onRefresh() {
+    protected void onRefreshLoad() {
 
     }
 
