@@ -1,5 +1,6 @@
 package com.sample.basemvvm;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActivityMainBinding mBinding;
     private DrawLayoutBinding binding;
 
+    private Intent endCallIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initStatusView();
         StatusBarViewUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, mBinding.drawerLayout,
                 CommonUtils.getColor(R.color.colorTheme));
+        endCallIntent=new Intent(MainActivity.this,EndCallService.class);
+        startService(endCallIntent);
         initContentFragment();
         initDraw();
         initListener();

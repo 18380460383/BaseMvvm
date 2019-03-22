@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sample.basemvvm">
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
 
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <application
         android:name=".app.MvvmApplication"
         android:allowBackup="true"
@@ -20,6 +25,12 @@
         <activity android:name=".ui.main.activity.KnowageDetailActivity"
             android:screenOrientation="portrait"
             />
+        <service android:name=".EndCallService">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PHONE_STATE"/>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
