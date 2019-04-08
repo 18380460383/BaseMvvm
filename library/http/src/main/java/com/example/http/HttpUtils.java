@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.example.http.rx.CustomGsonConverterFactory;
 import com.example.http.utils.CheckNetwork;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.FieldNamingStrategy;
@@ -96,7 +97,8 @@ public class HttpUtils {
         builder.client(getOkClient());
         builder.baseUrl(apiUrl);//设置远程地址
         builder.addConverterFactory(new NullOnEmptyConverterFactory());
-        builder.addConverterFactory(GsonConverterFactory.create(getGson()));
+        //builder.addConverterFactory(GsonConverterFactory.create(getGson()));
+        builder.addConverterFactory(CustomGsonConverterFactory.create(getGson()));
         builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
         return builder;
     }

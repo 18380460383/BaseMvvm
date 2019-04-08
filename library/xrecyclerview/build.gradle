@@ -1,6 +1,6 @@
-apply plugin: 'com.android.library'
+apply from: '../../commomgradle.gradle'
 
-android {
+/*android {
     def rootConfig = rootProject.extensions.getByName("ext")
     compileSdkVersion rootConfig.androidCompileSdkVersion
     buildToolsVersion rootConfig.androidBuildToolsVersion
@@ -21,7 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
+}*/
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

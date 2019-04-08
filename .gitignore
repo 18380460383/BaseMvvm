@@ -7,11 +7,11 @@
 /captures
 .externalNativeBuild
 /app/build
-/library/http/build
+/library/http/build/
 /library/http/http.iml
-/library/xrecyclerview/build
+/library/xrecyclerview/build/
 /library/xrecyclerview/xrecyclerview.iml
-/library/zoomlibrary/build
+/library/zoomlibrary/build/
 /library/zoomlibrary/zoomlibrary.iml
 /app/app.iml
 /library/library.iml

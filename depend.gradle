@@ -62,7 +62,7 @@ ext {    //所有项目根目录依赖
             zxing_core: "com.google.zxing:core:${zxing_core}"
     ]
     rxjava2_rxandroid = '2.0.1'
-    rxjava2_rxjava = '2.1.7'
+    rxjava2_rxjava = '2.2.8'
     rxjava = [
             rxjava2_rxandroid: "io.reactivex.rxjava2:rxandroid:${rxjava2_rxandroid}",
             rxjava2_rxjava   : "io.reactivex.rxjava2:rxjava:${rxjava2_rxjava}"

@@ -72,8 +72,6 @@ dependencies {
     def camera = rootProject.ext.camera
     implementation camera.zxing_core
     //    implementation "android.arch.lifecycle:common-java8:1.0.0"
-    def rxjava = rootProject.ext.rxjava
-    implementation rxjava.rxjava2_rxandroid
 
 
 

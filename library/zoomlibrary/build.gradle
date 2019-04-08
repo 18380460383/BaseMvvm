@@ -1,4 +1,9 @@
+apply from: '../../commomgradle.gradle'
+
+/*
+
 apply plugin: 'com.android.library'
+
 
 android {
     def rootConfig = rootProject.extensions.getByName("ext")
@@ -19,6 +24,7 @@ android {
         }
     }
 }
+*/
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
